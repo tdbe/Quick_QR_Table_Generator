@@ -1,0 +1,17 @@
+This file holds all the text that you want put into QR codes. One per line.
+The builtin `parseMethod = () =>` in QRSystem.cs requires an id and the dashed line below.
+Feel free to replace the parseMethod with something more technical, customizable, JSON, etc.
+(file id: QRGrp1)
+---------------------------------------------------------
+Put contents of QR 1 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 2 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 3 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 4 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 5 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 6 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 7 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 8 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 9 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 10 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 11 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
+Put contents of QR 12 here <-- Anything beyond the left arrow is a comment. The left arrow is the endline marker.
