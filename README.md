@@ -12,4 +12,4 @@ Output: an/ image(s), representing a/ sheet(s) of paper, e.g. A4, with qr codes 
 
 Unity 2021.1.12f1
 
-QR png builder from/by: QRCode.Zxing
+QR png file creator from/by: QRCode.Zxing
