@@ -79,7 +79,15 @@ public class QR_LayoutObjectScript : MonoBehaviour
       
         qr_Number.text = "#" + number;
         qr_GroupName.text = qrGroupName;
-        qr_LabelMerged.text = qr_Number.text + "_" + qr_GroupName.text;
+        if (qr_GroupName.text != "")
+        {
+            qr_LabelMerged.text = qr_Number.text + "_" + qr_GroupName.text;
+        }
+        else
+        {
+            qr_LabelMerged.text = "";
+        }
+
         if (texture != null)
         {
             Rect rect = new Rect(0, 0, texture.width, texture.height);

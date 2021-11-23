@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 282983772}
   - component: {fileID: 282983774}
   - component: {fileID: 282983773}
-  m_Layer: 2
+  m_Layer: 18
   m_Name: GroupName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 418296922}
   - component: {fileID: 418296924}
   - component: {fileID: 418296923}
-  m_Layer: 2
+  m_Layer: 18
   m_Name: QRNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1216064283}
   - component: {fileID: 7806527809963202015}
-  m_Layer: 2
+  m_Layer: 18
   m_Name: QR_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 1717742576}
   - component: {fileID: 1717742578}
   - component: {fileID: 1717742577}
-  m_Layer: 2
+  m_Layer: 18
   m_Name: QRCode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1575,7 +1575,7 @@ GameObject:
   - component: {fileID: 3194411910982962105}
   - component: {fileID: 7536400159278190449}
   - component: {fileID: 6954366959466424077}
-  m_Layer: 2
+  m_Layer: 18
   m_Name: QRLabelMerged
   m_TagString: Untagged
   m_Icon: {fileID: 0}

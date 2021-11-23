@@ -13,6 +13,8 @@ public class LayoutData : MonoBehaviour
     
 
     public Transform qrContainer = null;
+    public Transform headerInputGroup = null;
+    public Transform saveInputGroup = null;
     public Transform paper = null;
 
     public TMP_Text pageHeaderDate = null;
@@ -454,8 +456,6 @@ public class LayoutData : MonoBehaviour
         if (path == "")
             path = m_defaultQRSavePath;
 
-        //also remember what you printed and continue from there
-
         if (!Directory.Exists(path))
         {
        
@@ -465,5 +465,9 @@ public class LayoutData : MonoBehaviour
 
         m_takeScreenshot.SetTargetDir(path, pageHeaderDate.text);
         m_takeScreenshot.TakeScreenshotNow();
+
+        //also remember what you printed and continue from there
+        qrSystem.QRSystemOperation_HandlePageSuccessfullyPrinted();
+        qrSystem.QRSystemOperation_ProcessRequestToRegenerateQRs();
     }
 }

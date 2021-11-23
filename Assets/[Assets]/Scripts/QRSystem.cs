@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 public class QRSystem : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class QRSystem : MonoBehaviour
 
     [SerializeField]
     List<List<QR_SourceObject>> m_QRGroupList_of_QR_SourceObjects = new List<List<QR_SourceObject>>();
+    List<QR_SourceObject> m_QRSourceObjectsCurrentlyOnPage = new List<QR_SourceObject>();
 
     [SerializeField]
     List<QR_SourceObject> m_discardSourceObjectsList = new List<QR_SourceObject>();
@@ -186,8 +188,49 @@ public class QRSystem : MonoBehaviour
         GenerateQRImagesFromDB_andAssignToLayoutObjects();
     }
 
+    public void QRSystemOperation_HandlePageSuccessfullyPrinted()
+    {
+        EraseAlreadyPrintedQRSourceDataFromDatabase();
+    }
+
+    void EraseAlreadyPrintedQRSourceDataFromDatabase()
+    {
+        foreach (List<QR_SourceObject> group in m_QRGroupList_of_QR_SourceObjects.ToList()) {
+            foreach (QR_SourceObject qrso in group.ToList()) {
+                if (m_QRSourceObjectsCurrentlyOnPage.Contains(qrso))
+                {
+                
+                    group.Remove(qrso);
+                    if(group.Count == 0)
+                    {
+                        m_QRGroupList_of_QR_SourceObjects.Remove(group);
+                    }
+                }
+                
+            }
+        }
+        m_QRSourceObjectsCurrentlyOnPage.Clear();
+    }
+
+    void DoAQuickPrettyFeedbackAnimation()
+    {
+        StartCoroutine(Rotate(layoutData.qrContainer.transform, .225f));
+        StartCoroutine(Rotate(layoutData.headerInputGroup.transform, .225f));
+        StartCoroutine(Rotate(layoutData.saveInputGroup.transform, .225f));
+        //StartCoroutine(Rotate(layoutData.paper.transform, 1.25f));
+
+    }
+
+    void HandleRefreshFeedbackEvent(bool animate = true)
+    {
+        if(animate)
+            DoAQuickPrettyFeedbackAnimation();
+    }
+
     void ClearLayoutObjectsOfPreviousQRData()
     {
+        HandleRefreshFeedbackEvent();
+
         QR_SourceObject cleanSO = new QR_SourceObject();
         for(int i=0; i< m_qrLayoutObjectPool.Length; i++)
         {
@@ -200,7 +243,10 @@ public class QRSystem : MonoBehaviour
     public void QRSystemOperation_ProcessRequestToRegenerateQRs()
     {
         if (m_QRGroupList_of_QR_SourceObjects == null || m_QRGroupList_of_QR_SourceObjects.Count == 0)
+        {
+            ClearLayoutObjectsOfPreviousQRData();
             return;
+        }
         GenerateQRImagesFromDB_andAssignToLayoutObjects();
     }
 
@@ -210,6 +256,7 @@ public class QRSystem : MonoBehaviour
         //string qrGroupName = "qrGroup id from file";
 
         ClearLayoutObjectsOfPreviousQRData();
+        m_QRSourceObjectsCurrentlyOnPage.Clear();
         int skipAheadDiscarded = 0;
         int skippedFromLockedSlots = 0;
         for (int i = 0; i < m_totalQRsOnPage; i++)
@@ -273,6 +320,8 @@ public class QRSystem : MonoBehaviour
 
             m_qrLayoutObjectPool[i].SetUpQRCode(qrTex, qrSrcObj);//i_wSrcSkip_Layout
             m_qrLayoutObjectPool[i].gameObject.SetActive(true);//i_wSrcSkip_Layout
+
+            m_QRSourceObjectsCurrentlyOnPage.Add(qrSrcObj);
         }
         //qrObjectPool[i].SetUpQRCode(Texture2D texture, int number, string qrGroupName)
     }
@@ -322,8 +371,18 @@ public class QRSystem : MonoBehaviour
     }
 
 
-    public void TakeScreenshotAndSave()
+    IEnumerator Rotate(Transform target, float duration)
     {
-
+        float startRotation = target.eulerAngles.y;
+        float endRotation = startRotation + 360.0f;
+        float t = 0.0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float yRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % 360.0f;
+            target.eulerAngles = new Vector3(target.eulerAngles.x, yRotation,
+            target.eulerAngles.z);
+            yield return null;
+        }
     }
 }
