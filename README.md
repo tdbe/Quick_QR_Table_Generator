@@ -1,4 +1,4 @@
-# Quick_QR_Generator
+# Quick_QR_Table_Generator
 
 Quick QR Generator project that generates QRs from texts, and supports multi page printing and formatting of QR codes. QR sources can be read from a folder of multiple source text files.
 
